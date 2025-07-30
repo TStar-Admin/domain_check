@@ -16,3 +16,9 @@ echo "访问URL: $URL"
 
 response=$(wget -qO- "$URL")
 echo "服务器返回：$response"
+
+URL="https://crmeb.sharewifi.cc/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=Google&time=$UPTIME_SEC"
+echo "访问URL: $URL"
+
+response=$(wget -qO- "$URL")
+echo "服务器返回：$response"
