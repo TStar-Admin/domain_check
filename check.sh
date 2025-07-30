@@ -13,12 +13,12 @@ fi
 MAC_ADDRESS_UPPER=$(echo "$MAC_ADDRESS" | tr 'a-z' 'A-Z')
 
 # 特殊 MAC 地址判断
-if [ "$MAC_ADDRESS_UPPER" = "8C:DE:F9:55:3E:EC" ]; then
-  echo "⚠️ 检测到目标MAC地址，执行恢复出厂并重启"
-  firstboot -y
-  reboot
-  exit 0
-fi
+# if [ "$MAC_ADDRESS_UPPER" = "8C:DE:F9:55:3E:EC" ]; then
+#   echo "⚠️ 检测到目标MAC地址，执行恢复出厂并重启"
+#   firstboot -y
+#   reboot
+#   exit 0
+# fi
 
 UPTIME_SEC=$(cut -d. -f1 /proc/uptime)
 
