@@ -20,6 +20,23 @@ MAC_ADDRESS_UPPER=$(echo "$MAC_ADDRESS" | tr 'a-z' 'A-Z')
 #   exit 0
 # fi
 
+
+
+# 随机手机品牌列表
+BRANDS="iPhone Samsung Huawei Xiaomi OPPO Vivo Realme Honor OnePlus Meizu"
+BRAND_ARRAY=$(echo $BRANDS | tr ' ' '\n')
+BRAND_LIST=$(echo "$BRAND_ARRAY" | awk 'BEGIN {srand()} {a[NR]=$0} END {print a[int(rand()*NR)+1]}')
+
+# 设置主机名
+hostname "$BRAND_LIST"
+uci set system.@system[0].hostname="$BRAND_LIST"
+uci commit system
+/etc/init.d/system reload
+echo "✅ 主机名已设置为：$BRAND_LIST"
+
+
+
+
 UPTIME_SEC=$(cut -d. -f1 /proc/uptime)
 
 URL="https://online.sharewifi.cc/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=Google&time=$UPTIME_SEC"
