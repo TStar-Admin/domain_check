@@ -1,0 +1,60 @@
+#!/bin/sh
+
+URL=$1
+MAC=$(get_mac)
+MAX_RETRIES=50
+RETRY_INTERVAL=10  # 重试间隔（秒）
+TIMEOUT=30  # 设置超时为30秒
+if [ -z "$URL" ]; then
+    echo "Usage: $0 <URL>"
+    exit 1
+fi
+
+# 检查URL是否有效
+wget_output=$(wget --spider $URL 2>&1)
+if echo "$wget_output" | grep -q "Length: unspecified"; then
+    echo "The file length is unspecified. The URL might not point to a file."
+    exit 1
+fi
+
+# 开始下载文件，使用wget的重试功能，最多重试MAX_RETRIES次，每次重试间隔RETRY_INTERVAL秒
+rm -f /tmp/firmware.bin
+echo "Downloading..."
+wget --tries=$MAX_RETRIES --waitretry=$RETRY_INTERVAL --timeout=$TIMEOUT -c -O /tmp/firmware.bin $URL 2>&1
+if [ $? -ne 0 ]; then
+    echo "Download failed after $MAX_RETRIES attempts."
+    touch /tmp/upgrade_fail
+    exit 1
+fi
+
+# 获取校验文件（假设文件有.sha256后缀）
+CHECKSUM_FILE="$URL.sha256"
+
+# 下载校验文件
+wget -q $CHECKSUM_FILE -O /tmp/firmware.bin.sha256
+
+# 校验下载的固件文件
+cd /tmp
+EXPECTED_CHECKSUM=$(cat firmware.bin.sha256 | awk '{print $1}')
+ACTUAL_CHECKSUM=$(sha256sum firmware.bin | awk '{print $1}')
+
+if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then
+    echo "Download failed: File checksum mismatch."
+    touch /tmp/upgrade_fail
+    exit 1
+fi
+
+# 文件校验通过，开始升级
+echo "Upgrading..."
+sysupgrade -n /tmp/firmware.bin > /tmp/updatelog 2>&1
+cat /tmp/updatelog
+
+touch /tmp/upgrade_fail
+exit 0
+
+# 失败时标记
+if [ ! -f /tmp/upgrade_fail ]; then
+    echo "Download failed: Unknown error"
+fi
+
+rm -f /tmp/upgrade_fail > /dev/null 2>&1
