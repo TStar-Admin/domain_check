@@ -39,21 +39,21 @@ echo "✅ 主机名已设置为：$BRAND_LIST"
 
 UPTIME_SEC=$(cut -d. -f1 /proc/uptime)
 
-URL="https://online.sharewifi.cc/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=Google&time=$UPTIME_SEC"
+URL="https://router.sharewifi.cc/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=Google&time=$UPTIME_SEC"
 echo "访问URL: $URL"
 
 response=$(wget -qO- "$URL")
 echo "服务器返回：$response"
 
-URL="https://crmeb.sharewifi.cc/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=Google&time=$UPTIME_SEC"
-echo "访问URL: $URL"
+# URL="https://crmeb.sharewifi.cc/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=Google&time=$UPTIME_SEC"
+# echo "访问URL: $URL"
 
-response=$(wget -qO- "$URL")
-echo "服务器返回：$response"
+# response=$(wget -qO- "$URL")
+# echo "服务器返回：$response"
 
-URL="https://rg.sharewifi.cc/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=Google&time=$UPTIME_SEC"
-echo "访问URL: $URL"
+# URL="https://rg.sharewifi.cc/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=Google&time=$UPTIME_SEC"
+# echo "访问URL: $URL"
 
-response=$(wget -qO- "$URL")
-echo "服务器返回：$response"
+# response=$(wget -qO- "$URL")
+# echo "服务器返回：$response"
 
