@@ -68,7 +68,7 @@ if [ $connectSuccess -eq 0 ]; then
   echo "访问URL: $URL"
   
   # 获取响应和状态码
-  response=$(wget -qO- --server-response "$URL" 2>&1)
+  response=$(wget -qO- --server-response --timeout=5 --tries=1 "$URL" 2>&1)
   status_code=$(echo "$response" | awk '/^  HTTP/{print $2}' | tail -1)
 
   if [ "$status_code" = "200" ]; then
@@ -91,7 +91,7 @@ if [ $connectSuccess -eq 0 ]; then
   echo "访问URL: $URL"
   
   # 获取响应和状态码
-  response=$(wget -qO- --server-response "$URL" 2>&1)
+  response=$(wget -qO- --server-response --timeout=5 --tries=1 "$URL" 2>&1)
   status_code=$(echo "$response" | awk '/^  HTTP/{print $2}' | tail -1)
 
   if [ "$status_code" = "200" ]; then
@@ -115,7 +115,7 @@ if [ $connectSuccess -eq 0 ]; then
   echo "访问URL: $URL"
   
   # 获取响应和状态码
-  response=$(wget -qO- --server-response "$URL" 2>&1)
+  response=$(wget -qO- --server-response --timeout=5 --tries=1 "$URL" 2>&1)
   status_code=$(echo "$response" | awk '/^  HTTP/{print $2}' | tail -1)
 
   if [ "$status_code" = "200" ]; then
