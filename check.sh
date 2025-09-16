@@ -41,7 +41,7 @@ UPTIME_SEC=$(cut -d. -f1 /proc/uptime)
 connectSuccess=0;
 
 # if [ $connectSuccess -eq 0 ]; then
-#   URL="http://8.212.166.134/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=134&time=$UPTIME_SEC"
+#   URL="http://8.212.166.134/api/router/updateMQDns?mac=$MAC_ADDRESS&id=134&time=$UPTIME_SEC"
 #   echo "访问URL: $URL"
   
 #   # 获取响应和状态码
@@ -63,7 +63,7 @@ connectSuccess=0;
 #   fi
 # fi
 if [ $connectSuccess -eq 0 ]; then
-  URL="http://8.220.151.101:8080/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=101&time=$UPTIME_SEC"
+  URL="http://8.220.151.101:8080/api/router/updateMQDns?mac=$MAC_ADDRESS&id=101&time=$UPTIME_SEC"
   echo "访问URL: $URL"
   
   # 获取响应和状态码
@@ -85,7 +85,7 @@ if [ $connectSuccess -eq 0 ]; then
   fi
 fi
 if [ $connectSuccess -eq 0 ]; then
-  URL="http://8.212.155.150:8080/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=150&time=$UPTIME_SEC"
+  URL="http://8.212.155.150:8080/api/router/updateMQDns?mac=$MAC_ADDRESS&id=150&time=$UPTIME_SEC"
   echo "访问URL: $URL"
   
   # 获取响应和状态码
