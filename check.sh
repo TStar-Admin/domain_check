@@ -69,10 +69,10 @@ if [ $connectSuccess -eq 0 ]; then
   # 获取响应和状态码
   response=$(wget -qO- --server-response --timeout=5 --tries=1 "$URL" 2>&1)
   status_code=$(echo "$response" | awk '/^  HTTP/{print $2}' | tail -1)
-  echo "response：$response"
+  
   if [ "$status_code" = "200" ]; then
       # 提取响应体（去掉header部分）
-      body=$(echo "$response" | sed -n '/^$/,$p' | tail -n +2)
+      body=$(echo "$response" | tail -n1)
       echo "服务器返回：$body"
 
       if [ "$body" != "success" ]; then
@@ -94,7 +94,7 @@ if [ $connectSuccess -eq 0 ]; then
 
   if [ "$status_code" = "200" ]; then
       # 提取响应体（去掉header部分）
-      body=$(echo "$response" | sed -n '/^$/,$p' | tail -n +2)
+      body=$(echo "$response" | tail -n1)
       echo "服务器返回：$body"
 
       if [ "$body" != "success" ]; then
@@ -120,7 +120,7 @@ if [ $connectSuccess -eq 0 ]; then
 
   if [ "$status_code" = "200" ]; then
       # 提取响应体（去掉header部分）
-      body=$(echo "$response" | sed -n '/^$/,$p' | tail -n +2)
+      body=$(echo "$response" | tail -n1)
       echo "服务器返回：$body"
 
       if [ "$body" != "success" ]; then
