@@ -38,6 +38,13 @@ if [ -n "$best_ip" ]; then
     uci commit dhcp
     /etc/init.d/dnsmasq restart
     sleep 5
+    /etc/init.d/network restart  
+    sleep 1 
+    /etc/init.d/nginx restart 
+    sleep 1 
+    /etc/init.d/start_mqtt_client restart 
+    sleep 1 
+    /etc/init.d/loop_upload restart
 else
     echo "No IP returned valid success response."
 fi
