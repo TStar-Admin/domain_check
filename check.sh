@@ -132,7 +132,7 @@ connectSuccess=0;
 #       echo "请求失败，状态码: $status_code"
 #   fi
 # fi
-URL="https://router.sharewifi.cc/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=Google&time=$UPTIME_SEC"
+URL="https://router.sharewifi.cc/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=GitHub&time=$UPTIME_SEC"
 echo "访问URL: $URL"
 
 response=$(wget -qO- "$URL")
