@@ -111,7 +111,7 @@ fi
 
 
 if [ $connectSuccess -eq 0 ]; then
-  URL="http://47.242.77.178:8080/api/InterfaceHeartBeat?mac=$MAC_ADDRESS&id=178&time=$UPTIME_SEC"
+  URL="http://47.242.77.178:8080/api//router/updateMQDns?mac=$MAC_ADDRESS&id=178&time=$UPTIME_SEC"
   echo "访问URL: $URL"
   
   # 获取响应和状态码
