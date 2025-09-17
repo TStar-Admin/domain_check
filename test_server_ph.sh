@@ -37,10 +37,10 @@ if [ -n "$best_ip" ]; then
     uci set dhcp.@domain[-1].name='mq.hirechat.net'
     uci set dhcp.@domain[-1].ip="$best_ip"
     uci commit dhcp
-    /etc/init.d/dnsmasq restart
-    sleep 5
-    /etc/init.d/network restart  
-    sleep 1 
+    /etc/init.d/dnsmasq reload
+
+    #/etc/init.d/network restart  
+
     /etc/init.d/nginx restart 
     sleep 1 
     /etc/init.d/start_mqtt_client restart 
