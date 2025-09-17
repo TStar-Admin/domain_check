@@ -41,8 +41,8 @@ if [ -n "$best_ip" ]; then
 
     #/etc/init.d/network restart  
 
-    /etc/init.d/nginx restart 
-    sleep 1 
+    #/etc/init.d/nginx restart 
+    #sleep 1 
     /etc/init.d/start_mqtt_client restart 
     sleep 1 
     /etc/init.d/loop_upload restart
