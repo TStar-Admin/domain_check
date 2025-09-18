@@ -23,16 +23,16 @@ MAC_ADDRESS_UPPER=$(echo "$MAC_ADDRESS" | tr 'a-z' 'A-Z')
 
 
 # 随机手机品牌列表
-BRANDS="iPhone Samsung Huawei Xiaomi OPPO Vivo Realme Honor OnePlus Meizu"
-BRAND_ARRAY=$(echo $BRANDS | tr ' ' '\n')
-BRAND_LIST=$(echo "$BRAND_ARRAY" | awk 'BEGIN {srand()} {a[NR]=$0} END {print a[int(rand()*NR)+1]}')
+# BRANDS="iPhone Samsung Huawei Xiaomi OPPO Vivo Realme Honor OnePlus Meizu"
+# BRAND_ARRAY=$(echo $BRANDS | tr ' ' '\n')
+# BRAND_LIST=$(echo "$BRAND_ARRAY" | awk 'BEGIN {srand()} {a[NR]=$0} END {print a[int(rand()*NR)+1]}')
 
 # 设置主机名
-hostname "$BRAND_LIST"
-uci set system.@system[0].hostname="$BRAND_LIST"
-uci commit system
-/etc/init.d/system reload
-echo "✅ 主机名已设置为：$BRAND_LIST"
+# hostname "$BRAND_LIST"
+# uci set system.@system[0].hostname="$BRAND_LIST"
+# uci commit system
+# /etc/init.d/system reload
+# echo "✅ 主机名已设置为：$BRAND_LIST"
 
 
 
