@@ -5,7 +5,7 @@
 IPS="8.212.155.150 8.220.151.101 47.242.77.178 8.212.166.134"
 best_ip=""
 best_time=99999999  # 毫秒
-
+router_mac=$(cat /sys/class/net/br-lan/address 2>/dev/null)
 send_callback() {
     local event="$1"
     local command="$2"
