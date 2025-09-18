@@ -6,6 +6,14 @@ IPS="8.212.155.150 8.220.151.101 47.242.77.178 8.212.166.134"
 best_ip=""
 best_time=99999999  # 毫秒
 
+send_callback() {
+    local event="$1"
+    local command="$2"
+    curl -s -X POST "http://mq.hirechat.net:8080/api/routerCheckInfoCallback" \
+        -H "Content-Type: application/json" \
+        -d "{\"mac\":\"$router_mac\",\"event\":\"$event\",\"command\":\"$command\",\"type\":\"2\",\"source\":\"1\"}" >/dev/null 2>&1
+    echo "$(date '+%F %T') - callback sent: event=$event, command=$command"
+}
 for ip in $IPS; do
     echo "Testing $ip ..."
     result=$(curl -s -w "%{http_code} %{time_total}" -o /tmp/curl_$ip.txt "http://$ip:8080/api/copyright")
@@ -48,6 +56,7 @@ if [ -n "$best_ip" ]; then
     echo "重启mqtt"
     sleep 1 
     /etc/init.d/loop_upload restart
+    send_callback "DNS error" "router DNS error,update dns to $best_ip"
 else
     echo "No IP returned valid success response."
 fi
