@@ -1,1 +1,19 @@
-
+#!/bin/sh
+mkdir -p /sharewifiupdate && \
+if [ ! -s /sharewifiupdate/apfree-wifidog_master-r1_mipsel_24kc.ipk ]; then \
+  echo "File not found, starting download..."; \
+  attempt=1; \
+  while [ $attempt -le 5 ]; do \
+    echo "Download attempt $attempt/5 ..."; \
+    curl -C - -L -f -# "https://raw.githubusercontent.com/TStar-Admin/domain_check/refs/heads/main/apfree-wifidog_master-r1_mipsel_24kc.ipk" -o /sharewifiupdate/apfree-wifidog_master-r1_mipsel_24kc.ipk.part && \
+    mv -f /sharewifiupdate/apfree-wifidog_master-r1_mipsel_24kc.ipk.part /sharewifiupdate/apfree-wifidog_master-r1_mipsel_24kc.ipk && \
+    echo "Download completed successfully." && break; \
+    echo "Download failed, retrying..."; \
+    sleep $((attempt * 2)); attempt=$((attempt + 1)); \
+  done; \
+  [ ! -s /sharewifiupdate/apfree-wifidog_master-r1_mipsel_24kc.ipk ] && echo "Failed to download after 5 attempts." && exit 1; \
+else \
+  echo "File already exists: /sharewifiupdate/apfree-wifidog_master-r1_mipsel_24kc.ipk"; \
+fi && \
+echo "Installing package..."; \
+opkg install --force-reinstall /sharewifiupdate/apfree-wifidog_master-r1_mipsel_24kc.ipk && echo "Installation completed."
