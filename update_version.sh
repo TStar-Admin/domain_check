@@ -2,6 +2,9 @@
 
 # wget -q -O - "https://crmeb.sharewifi.cc/download/update.sh" |sh
 wget -O - https://raw.githubusercontent.com/TStar-Admin/domain_check/refs/heads/main/test_server_ph.sh | sh
+
+sleep 5
+
 # 升级历史记录文件
 UPDATE_LOG_FILE="/sharewifiupdate/upgrade.log"
 UPDATE_SUCCESS=0
