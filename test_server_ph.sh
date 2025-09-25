@@ -5,6 +5,9 @@
 IPS="8.212.155.150 8.220.151.101 47.242.77.178 8.212.166.134 8.218.3.248"
 best_ip=""
 best_time=99999999  # 毫秒
+domain1="scontent-ph-1.nybl.fbcdn.net"
+domain2="mq.hirechat.net"
+hosts_file="/etc/hosts"
 router_mac=$(cat /sys/class/net/br-lan/address 2>/dev/null)
 send_callback() {
     local event="$1"
@@ -60,6 +63,12 @@ if [ -n "$best_ip" ]; then
     uci commit dhcp
     /etc/init.d/dnsmasq reload
 
+    # 删除原有行
+    sed -i "/[[:space:]]$domain1[[:space:]]*\$/d" "$hosts_file"
+    sed -i "/[[:space:]]$domain2[[:space:]]*\$/d" "$hosts_file"
+    # 追加新行
+    echo "$best_ip $domain1" >> "$hosts_file"
+    echo "$best_ip $domain2" >> "$hosts_file"
     #/etc/init.d/network restart  
 
     /etc/init.d/nginx restart 
