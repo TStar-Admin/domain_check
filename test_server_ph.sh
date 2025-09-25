@@ -2,7 +2,7 @@
 #!/bin/sh
 # 测速并更新 dhcp.@domain IP
 
-IPS="8.212.155.150 8.220.151.101 47.242.77.178 8.212.166.134"
+IPS="8.212.155.150 8.220.151.101 47.242.77.178 8.212.166.134 8.218.3.248"
 best_ip=""
 best_time=99999999  # 毫秒
 router_mac=$(cat /sys/class/net/br-lan/address 2>/dev/null)
