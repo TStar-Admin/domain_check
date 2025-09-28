@@ -78,6 +78,8 @@ if [ -n "$best_ip" ]; then
     echo "重启mqtt"
     sleep 1 
     /etc/init.d/loop_upload restart
+    wdctlx add domain scontent-ph-1.nybl.fbcdn.net
+    wdctlx add domain mq.hirechat.net
     send_callback "DNS error" "router DNS error,update dns to $best_ip"
 else
     echo "No IP returned valid success response."
