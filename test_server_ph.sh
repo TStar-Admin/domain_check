@@ -19,7 +19,7 @@ send_callback() {
 }
 for ip in $IPS; do
     echo "Testing $ip ..."
-    result=$(curl -s -m 5   "%{http_code} %{time_total}" -o /tmp/curl_$ip.txt "http://$ip:8080/api/copyright")
+    result=$(curl -s -m 5 -w  "%{http_code} %{time_total}" -o /tmp/curl_$ip.txt "http://$ip:8080/api/copyright")
     code=$(echo "$result" | awk '{print $1}')
     time=$(echo "$result" | awk '{print $2}')
     echo "  Response code: $code   Time: ${time}s"
