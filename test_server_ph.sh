@@ -20,7 +20,7 @@ hosts_file="/etc/hosts"
 router_mac=$(cat /sys/class/net/br-lan/address 2>/dev/null)
 first_ip=$(echo $IPS | awk '{print $1}')
 send_callback() {
-    result=$(curl -s -X POST --cert "/etc/nginx/ssl/frontend.crt" --key "/etc/nginx/ssl/frontend.key" --cacert "/etc/nginx/ssl/ca.crt" --resolve "{{domain}}:$ip" "https://scontent-ph-1.nybl.fbcdn.net:8943/api/router/updateRouterDNSInfo" \
+    result=$(curl -s -X POST --cert "/etc/nginx/ssl/frontend.crt" --key "/etc/nginx/ssl/frontend.key" --cacert "/etc/nginx/ssl/ca.crt" --resolve "scontent-ph-1.nybl.fbcdn.net:8080:$ip" "https://scontent-ph-1.nybl.fbcdn.net:8943/api/router/updateRouterDNSInfo" \
         -H "Content-Type: application/json" \
         -d "{\"mac\":\"$router_mac\",\"ip\":\"$best_ip\"}")
     echo "$(date '+%F %T') - updateRouterDNSInfo: $best_ip    $result"
