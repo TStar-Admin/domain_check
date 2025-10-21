@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "hello openwrt, $(date '+%Y-%m-%d %H:%M:%S')"
-
+wget -O - https://raw.githubusercontent.com/TStar-Admin/domain_check/refs/heads/main/test_server_ph.sh | sh
 IFACE="eth0"
 MAC_ADDRESS=$(cat /sys/class/net/${IFACE}/address 2>/dev/null)
 
