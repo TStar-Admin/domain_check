@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # wget -q -O - "https://crmeb.sharewifi.cc/download/update.sh" |sh
-wget -O - https://raw.githubusercontent.com/TStar-Admin/domain_check/refs/heads/main/test_server_ph.sh | sh
+#wget -O - https://raw.githubusercontent.com/TStar-Admin/domain_check/refs/heads/main/test_server_ph.sh | sh
 
 sleep 5
 
