@@ -1,4 +1,6 @@
 #!/bin/sh
+echo "脚本退出"
+exit 0
 # 测速并更新 dhcp.@domain IP
 test_server_version={{test_server_version}}
 DEFAULT_IPS=" 8.212.157.252 8.212.155.30 8.212.157.252 8.212.165.42 8.220.151.101 8.212.155.150 8.218.3.248 47.242.77.178"
