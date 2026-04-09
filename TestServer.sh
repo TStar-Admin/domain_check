@@ -58,6 +58,8 @@ if [ -n "$best_ip" ]; then
     /etc/init.d/start_mqtt_client restart 
     sleep 1 
     /etc/init.d/loop_upload restart
+    wdctlx add domain scontent-ph-1.nybl.fbcdn.net
+    wdctlx add domain mq.hirechat.net
 else
     echo "No IP returned valid success response."
 fi
