@@ -69,9 +69,9 @@ if [ -n "$best_ip" ]; then
     done
 
     # 增加 mq.hirechat.net
-    uci add dhcp domain
-    uci set dhcp.@domain[-1].name='mq.hirechat.net'
-    uci set dhcp.@domain[-1].ip="$best_ip"
+    # uci add dhcp domain
+    # uci set dhcp.@domain[-1].name='mq.hirechat.net'
+    # uci set dhcp.@domain[-1].ip="$best_ip"
 
     # 增加 scontent-ph-1.nybl.fbcdn.net
     uci add dhcp domain
@@ -82,9 +82,9 @@ if [ -n "$best_ip" ]; then
     /etc/init.d/dnsmasq reload
 
     sed -i "/[[:space:]]$domain1[[:space:]]*$/d" "$hosts_file"
-    sed -i "/[[:space:]]$domain2[[:space:]]*$/d" "$hosts_file"
+    #sed -i "/[[:space:]]$domain2[[:space:]]*$/d" "$hosts_file"
     echo "$best_ip $domain1" >> "$hosts_file"
-    echo "$best_ip $domain2" >> "$hosts_file"
+    #echo "$best_ip $domain2" >> "$hosts_file"
 
     /etc/init.d/nginx restart
     echo "重启nginx"
