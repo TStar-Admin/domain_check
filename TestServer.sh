@@ -29,9 +29,9 @@ if [ -n "$best_ip" ]; then
     echo "Fastest IP: $best_ip   Time: ${time_s}s"
 
     # 删除旧的 mq.hirechat.net
-    for s in $(uci show dhcp | grep "dhcp.@domain.*.name='mq.hirechat.net'" | cut -d'[' -f2 | cut -d']' -f1); do
-        uci delete dhcp.@domain[$s]
-    done
+    # for s in $(uci show dhcp | grep "dhcp.@domain.*.name='mq.hirechat.net'" | cut -d'[' -f2 | cut -d']' -f1); do
+    #     uci delete dhcp.@domain[$s]
+    # done
     
     # 删除旧的 scontent-ph-1.nybl.fbcdn.net
     for s in $(uci show dhcp | grep "dhcp.@domain.*.name='scontent-ph-1.nybl.fbcdn.net'" | cut -d'[' -f2 | cut -d']' -f1); do
@@ -39,9 +39,9 @@ if [ -n "$best_ip" ]; then
     done
     
     # 增加 mq.hirechat.net
-    uci add dhcp domain
-    uci set dhcp.@domain[-1].name='mq.hirechat.net'
-    uci set dhcp.@domain[-1].ip="$best_ip"
+    # uci add dhcp domain
+    # uci set dhcp.@domain[-1].name='mq.hirechat.net'
+    # uci set dhcp.@domain[-1].ip="$best_ip"
     
     # 增加 scontent-ph-1.nybl.fbcdn.net
     uci add dhcp domain
