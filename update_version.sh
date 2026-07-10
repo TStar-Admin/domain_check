@@ -116,7 +116,7 @@ sharewifi_update() {
             sleep 5
             MAC_ADDRESS=$(cat /sys/class/net/eth0/address)
             
-            curl "http://mq.hirechat.net:8080/api/updateShVer?mac=$MAC_ADDRESS&ver=$VERSION"
+            curl "http://download.sharewifi.cc/api/updateShVer?mac=$MAC_ADDRESS&ver=$VERSION"
             send_callback "udpate router version" ""
             cp -r $EXTRACT_DIR/files/* /     
             rm -r $EXTRACT_DIR
@@ -155,7 +155,7 @@ check_version_upgraded() {
 #0 或者不带参数 版本号变化才升级
 VERSION="$1"
 
-URL="http://mq.hirechat.net:8080/download/${VERSION}.tar.gz"
+URL="http://download.sharewifi.cc/download/${VERSION}.tar.gz"
 FORCE=1  # 如需强制升级可改成 1，或再加逻辑接参数控制
 send_callback "script run" ""
 sharewifi_update "$VERSION" "$URL" "$FORCE"
